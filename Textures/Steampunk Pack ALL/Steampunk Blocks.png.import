@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://dt1iwb54n0x65"
-path="res://.godot/imported/Steampunk Corse Elements.png-4d2d97d6c02c348b45153b68c4fd37a9.ctex"
+uid="uid://duo0cba3plvbs"
+path="res://.godot/imported/Steampunk Blocks.png-926e90dfe8933186e9277f980cb03175.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Steampunk Pack ALL/Steampunk Corse Elements.png"
-dest_files=["res://.godot/imported/Steampunk Corse Elements.png-4d2d97d6c02c348b45153b68c4fd37a9.ctex"]
+source_file="res://Textures/Steampunk Pack ALL/Steampunk Blocks.png"
+dest_files=["res://.godot/imported/Steampunk Blocks.png-926e90dfe8933186e9277f980cb03175.ctex"]
 
 [params]
 

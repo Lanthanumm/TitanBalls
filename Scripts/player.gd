@@ -2,6 +2,8 @@ extends CharacterBody2D
 
 @export var speed = 300.0
 @export var jump_velocity = -400.0
+@export var decceleration = 60
+@export var acceleration = 60
 
 @onready var anim = $AnimationPlayer
 @onready var sprite = $Sprite
@@ -14,23 +16,23 @@ func _physics_process(delta: float) -> void:
 	if not is_on_floor():
 		velocity.y += gravity * delta
 	
-	var direction := Input.get_axis("ui_left", "ui_right")
+	var direction := Input.get_axis("move_left", "move_right")
 	if direction:
 		if direction > 0:
 			sprite.flip_h = false
 		else:
 			sprite.flip_h = true
 	
-		velocity.x = direction * speed
+		velocity.x = move_toward(velocity.x, direction * speed, acceleration)
 		if is_on_floor():
 			anim.play("walk")
 	
 	else:
-		velocity.x = move_toward(velocity.x, 0, speed)
+		velocity.x = move_toward(velocity.x, 0, decceleration)
 		if is_on_floor():
 			anim.play("idle")
 	
-	if Input.is_action_just_pressed("ui_accept") and is_on_floor():
+	if Input.is_action_just_pressed("jump") and is_on_floor():
 		velocity.y = jump_velocity
 		anim.play("jump")
 	
