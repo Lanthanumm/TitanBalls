@@ -1,7 +1,8 @@
-[gd_scene load_steps=11 format=3 uid="uid://x0vlml2h23s6"]
+[gd_scene load_steps=12 format=3 uid="uid://x0vlml2h23s6"]
 
 [ext_resource type="Script" path="res://Scripts/player.gd" id="1_rjuu7"]
 [ext_resource type="Texture2D" uid="uid://bx1xbj2ip8fe8" path="res://Textures/hunter_spritesheet.png" id="2_n400k"]
+[ext_resource type="Script" path="res://Scripts/Abilities.gd" id="3_uje85"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_5i0sn"]
 size = Vector2(40.7432, 40.7432)
@@ -39,7 +40,7 @@ tracks/0/keys = {
 
 [sub_resource type="Animation" id="Animation_2vod6"]
 resource_name = "fall"
-length = 0.1
+length = 0.2
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
@@ -47,10 +48,10 @@ tracks/0/path = NodePath("Sprite:frame")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
+"times": PackedFloat32Array(0, 0.1),
+"transitions": PackedFloat32Array(1, 1),
 "update": 1,
-"values": [43]
+"values": [42, 43]
 }
 
 [sub_resource type="Animation" id="Animation_kuvla"]
@@ -132,3 +133,6 @@ shape = SubResource("RectangleShape2D_5i0sn")
 libraries = {
 "": SubResource("AnimationLibrary_l56nc")
 }
+
+[node name="Abilities" type="Node2D" parent="."]
+script = ExtResource("3_uje85")

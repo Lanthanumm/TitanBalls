@@ -898,9 +898,8 @@ layer_2/tile_data = PackedInt32Array(393217, 131072, 1, 393218, 131072, 1, 39321
 
 [node name="Player" parent="." instance=ExtResource("6_ivviu")]
 position = Vector2(664, 361)
-dash_velocity = 1500
+dash_velocity = 900
 jump_velocity = -1000.0
-fall_threshold = 850
 
 [node name="Camera2D" type="Camera2D" parent="Player"]
 limit_left = -342

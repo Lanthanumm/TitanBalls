@@ -1,22 +1,53 @@
 extends CharacterBody2D
 
 @export var speed = 300.0
+@export var decceleration = 60.0
+@export var acceleration = 60.0
+@export var dash_velocity = 300
+
 @export var jump_velocity = -400.0
-@export var decceleration = 60
-@export var acceleration = 60
+@export var gravity = 2950
+@export var fall_threshold: int
 
 @onready var anim = $AnimationPlayer
 @onready var sprite = $Sprite
 
-var gravity: int = ProjectSettings.get_setting("physics/2d/default_gravity")
+var direction: float
+var is_dashing: bool
 
-
+enum CurrentAnim {IDLE, WALK, JUMP, FALL, DASH}
+var current_anim: CurrentAnim
 
 func _physics_process(delta: float) -> void:
+	if !is_dashing:
+		handle_dir()
+		handle_vertical_dir(delta)
+	else:
+		velocity.x = move_toward(velocity.x, 0, decceleration)
+	
+	if abs(velocity.x) <= speed:
+		is_dashing = false
+	
+	move_and_slide()
+
+
+
+func handle_vertical_dir(delta):
 	if not is_on_floor():
 		velocity.y += gravity * delta
+		
+	if Input.is_action_just_pressed("jump") and is_on_floor():
+		velocity.y = jump_velocity
 	
-	var direction := Input.get_axis("move_left", "move_right")
+	if velocity.y > fall_threshold  && current_anim != CurrentAnim.FALL:
+		anim.play("fall")
+		current_anim = CurrentAnim.FALL
+	if velocity.y < 0 && current_anim != CurrentAnim.JUMP:
+		anim.play("jump")
+		current_anim = CurrentAnim.JUMP
+
+func handle_dir():
+	direction = Input.get_axis("move_left", "move_right")
 	if direction:
 		if direction > 0:
 			sprite.flip_h = false
@@ -26,17 +57,10 @@ func _physics_process(delta: float) -> void:
 		velocity.x = move_toward(velocity.x, direction * speed, acceleration)
 		if is_on_floor():
 			anim.play("walk")
+			current_anim = CurrentAnim.WALK
 	
 	else:
 		velocity.x = move_toward(velocity.x, 0, decceleration)
 		if is_on_floor():
 			anim.play("idle")
-	
-	if Input.is_action_just_pressed("jump") and is_on_floor():
-		velocity.y = jump_velocity
-		anim.play("jump")
-	
-	if velocity.y > 50:
-		anim.play("fall")
-	
-	move_and_slide()
+			current_anim = CurrentAnim.IDLE
