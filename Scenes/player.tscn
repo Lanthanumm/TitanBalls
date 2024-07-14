@@ -115,7 +115,6 @@ _data = {
 }
 
 [node name="Player" type="CharacterBody2D"]
-scale = Vector2(1.2272, 1.2272)
 script = ExtResource("1_rjuu7")
 
 [node name="Sprite" type="Sprite2D" parent="."]

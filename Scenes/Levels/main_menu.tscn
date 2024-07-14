@@ -1,0 +1,538 @@
+[gd_scene load_steps=4 format=3 uid="uid://h613cy4huyew"]
+
+[ext_resource type="Script" path="res://Scripts/MainMenu.gd" id="1_hcn4l"]
+[ext_resource type="Texture2D" uid="uid://dq8bwmv4mp121" path="res://Textures/icon.svg" id="2_6v4gj"]
+[ext_resource type="Script" path="res://Scripts/KeyBinding.gd" id="3_nc7t1"]
+
+[node name="MainMenu" type="Control" node_paths=PackedStringArray("main_controls", "options_vbox", "options_nav")]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_hcn4l")
+main_controls = NodePath("MainControls/VBoxContainer")
+options_vbox = NodePath("OptionsPanel/Margin/Options")
+options_nav = NodePath("OptionsPanel/Margin/Options/OptionsTabs")
+
+[node name="MainControls" type="MarginContainer" parent="."]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -156.0
+offset_top = -74.0
+offset_right = 156.0
+offset_bottom = 74.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_vertical = 8
+
+[node name="VBoxContainer" type="VBoxContainer" parent="MainControls"]
+custom_minimum_size = Vector2(200, 0)
+layout_mode = 2
+theme_override_constants/separation = 8
+alignment = 1
+
+[node name="Button1" type="Button" parent="MainControls/VBoxContainer"]
+layout_mode = 2
+focus_mode = 0
+text = "Play
+"
+
+[node name="Button2" type="Button" parent="MainControls/VBoxContainer"]
+layout_mode = 2
+focus_mode = 0
+text = "Options"
+
+[node name="Button3" type="Button" parent="MainControls/VBoxContainer"]
+layout_mode = 2
+focus_mode = 0
+text = "Extra"
+
+[node name="Button4" type="Button" parent="MainControls/VBoxContainer"]
+layout_mode = 2
+focus_mode = 0
+text = "Quit Game
+"
+
+[node name="CharSelector" type="PanelContainer" parent="."]
+visible = false
+custom_minimum_size = Vector2(500, 0)
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -286.0
+offset_top = -91.5
+offset_right = 286.0
+offset_bottom = 91.5
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="HBoxContainer" type="HBoxContainer" parent="CharSelector"]
+layout_mode = 2
+theme_override_constants/separation = 20
+
+[node name="Char1" type="VBoxContainer" parent="CharSelector/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_constants/separation = 20
+
+[node name="Label" type="Label" parent="CharSelector/HBoxContainer/Char1"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 25
+text = "Hunter"
+horizontal_alignment = 1
+
+[node name="TextureButton" type="TextureButton" parent="CharSelector/HBoxContainer/Char1"]
+layout_mode = 2
+size_flags_vertical = 3
+focus_mode = 0
+texture_normal = ExtResource("2_6v4gj")
+stretch_mode = 3
+
+[node name="Char2" type="VBoxContainer" parent="CharSelector/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_constants/separation = 20
+
+[node name="Label" type="Label" parent="CharSelector/HBoxContainer/Char2"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 25
+text = "Circle"
+horizontal_alignment = 1
+
+[node name="TextureButton" type="TextureButton" parent="CharSelector/HBoxContainer/Char2"]
+layout_mode = 2
+size_flags_vertical = 3
+focus_mode = 0
+texture_normal = ExtResource("2_6v4gj")
+stretch_mode = 3
+
+[node name="Char3" type="VBoxContainer" parent="CharSelector/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_constants/separation = 20
+
+[node name="Label" type="Label" parent="CharSelector/HBoxContainer/Char3"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 25
+text = "Hexagon"
+horizontal_alignment = 1
+
+[node name="TextureButton" type="TextureButton" parent="CharSelector/HBoxContainer/Char3"]
+layout_mode = 2
+size_flags_vertical = 3
+focus_mode = 0
+texture_normal = ExtResource("2_6v4gj")
+stretch_mode = 3
+
+[node name="Char4" type="VBoxContainer" parent="CharSelector/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_constants/separation = 20
+
+[node name="Label" type="Label" parent="CharSelector/HBoxContainer/Char4"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 25
+text = "???"
+horizontal_alignment = 1
+
+[node name="TextureButton" type="TextureButton" parent="CharSelector/HBoxContainer/Char4"]
+layout_mode = 2
+size_flags_vertical = 3
+focus_mode = 0
+texture_normal = ExtResource("2_6v4gj")
+stretch_mode = 3
+
+[node name="OptionsPanel" type="PanelContainer" parent="."]
+visible = false
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Margin" type="MarginContainer" parent="OptionsPanel"]
+layout_mode = 2
+theme_override_constants/margin_left = 420
+theme_override_constants/margin_top = 40
+theme_override_constants/margin_right = 420
+theme_override_constants/margin_bottom = 40
+
+[node name="Options" type="VBoxContainer" parent="OptionsPanel/Margin"]
+layout_mode = 2
+theme_override_constants/separation = 25
+
+[node name="OptionsTabs" type="HBoxContainer" parent="OptionsPanel/Margin/Options"]
+layout_mode = 2
+theme_override_constants/separation = 60
+alignment = 1
+
+[node name="Graphics" type="Button" parent="OptionsPanel/Margin/Options/OptionsTabs"]
+custom_minimum_size = Vector2(100, 0)
+layout_mode = 2
+focus_mode = 0
+text = "Graphics"
+
+[node name="Controls" type="Button" parent="OptionsPanel/Margin/Options/OptionsTabs"]
+custom_minimum_size = Vector2(100, 0)
+layout_mode = 2
+focus_mode = 0
+text = "Controls"
+
+[node name="Sounds" type="Button" parent="OptionsPanel/Margin/Options/OptionsTabs"]
+custom_minimum_size = Vector2(100, 0)
+layout_mode = 2
+focus_mode = 0
+text = "Sounds
+"
+
+[node name="Line1" type="ColorRect" parent="OptionsPanel/Margin/Options"]
+custom_minimum_size = Vector2(0, 1)
+layout_mode = 2
+
+[node name="Graphics" type="VBoxContainer" parent="OptionsPanel/Margin/Options"]
+visible = false
+layout_mode = 2
+theme_override_constants/separation = 15
+alignment = 1
+
+[node name="Particles" type="HBoxContainer" parent="OptionsPanel/Margin/Options/Graphics"]
+layout_direction = 1
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="Label" type="Label" parent="OptionsPanel/Margin/Options/Graphics/Particles"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_font_sizes/font_size = 25
+text = "Particles"
+
+[node name="CheckButton" type="CheckButton" parent="OptionsPanel/Margin/Options/Graphics/Particles"]
+layout_mode = 2
+focus_mode = 0
+
+[node name="Effetcts" type="HBoxContainer" parent="OptionsPanel/Margin/Options/Graphics"]
+layout_direction = 1
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="Label" type="Label" parent="OptionsPanel/Margin/Options/Graphics/Effetcts"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_font_sizes/font_size = 25
+text = "Effects"
+
+[node name="CheckButton" type="CheckButton" parent="OptionsPanel/Margin/Options/Graphics/Effetcts"]
+layout_mode = 2
+focus_mode = 0
+
+[node name="Splashes" type="HBoxContainer" parent="OptionsPanel/Margin/Options/Graphics"]
+layout_direction = 1
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="Label" type="Label" parent="OptionsPanel/Margin/Options/Graphics/Splashes"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_font_sizes/font_size = 25
+text = "Splashes"
+
+[node name="CheckButton" type="CheckButton" parent="OptionsPanel/Margin/Options/Graphics/Splashes"]
+layout_mode = 2
+focus_mode = 0
+
+[node name="Brightness" type="HBoxContainer" parent="OptionsPanel/Margin/Options/Graphics"]
+layout_direction = 1
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="Label" type="Label" parent="OptionsPanel/Margin/Options/Graphics/Brightness"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_font_sizes/font_size = 25
+text = "Brightness"
+
+[node name="HSlider" type="HSlider" parent="OptionsPanel/Margin/Options/Graphics/Brightness"]
+custom_minimum_size = Vector2(225, 35)
+layout_mode = 2
+size_flags_horizontal = 10
+focus_mode = 0
+
+[node name="Controls" type="VBoxContainer" parent="OptionsPanel/Margin/Options"]
+visible = false
+layout_mode = 2
+theme_override_constants/separation = 15
+
+[node name="KeyBinding" type="Button" parent="OptionsPanel/Margin/Options/Controls"]
+layout_mode = 2
+size_flags_horizontal = 3
+focus_mode = 0
+theme_override_font_sizes/font_size = 25
+text = "Key binding"
+alignment = 0
+
+[node name="InvertMouse" type="HBoxContainer" parent="OptionsPanel/Margin/Options/Controls"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="OptionsPanel/Margin/Options/Controls/InvertMouse"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_font_sizes/font_size = 25
+text = "Invert mouse by X axis"
+
+[node name="CheckButton" type="CheckButton" parent="OptionsPanel/Margin/Options/Controls/InvertMouse"]
+layout_mode = 2
+focus_mode = 0
+
+[node name="MouseSensivity" type="HBoxContainer" parent="OptionsPanel/Margin/Options/Controls"]
+layout_direction = 1
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="Label" type="Label" parent="OptionsPanel/Margin/Options/Controls/MouseSensivity"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_font_sizes/font_size = 25
+text = "Mouse sensivity"
+
+[node name="HSlider" type="HSlider" parent="OptionsPanel/Margin/Options/Controls/MouseSensivity"]
+custom_minimum_size = Vector2(225, 35)
+layout_mode = 2
+size_flags_horizontal = 10
+focus_mode = 0
+
+[node name="Sounds" type="VBoxContainer" parent="OptionsPanel/Margin/Options"]
+visible = false
+layout_mode = 2
+theme_override_constants/separation = 15
+
+[node name="MasterVolume" type="HBoxContainer" parent="OptionsPanel/Margin/Options/Sounds"]
+layout_direction = 1
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="Label" type="Label" parent="OptionsPanel/Margin/Options/Sounds/MasterVolume"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_font_sizes/font_size = 25
+text = "Master volume"
+
+[node name="HSlider" type="HSlider" parent="OptionsPanel/Margin/Options/Sounds/MasterVolume"]
+custom_minimum_size = Vector2(225, 0)
+layout_mode = 2
+size_flags_horizontal = 10
+focus_mode = 0
+
+[node name="MainMenuMusic" type="HBoxContainer" parent="OptionsPanel/Margin/Options/Sounds"]
+layout_direction = 1
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="Label" type="Label" parent="OptionsPanel/Margin/Options/Sounds/MainMenuMusic"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_font_sizes/font_size = 25
+text = "Main menu music
+"
+
+[node name="HSlider" type="HSlider" parent="OptionsPanel/Margin/Options/Sounds/MainMenuMusic"]
+custom_minimum_size = Vector2(225, 0)
+layout_mode = 2
+size_flags_horizontal = 10
+
+[node name="GameMusic" type="HBoxContainer" parent="OptionsPanel/Margin/Options/Sounds"]
+layout_direction = 1
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="Label" type="Label" parent="OptionsPanel/Margin/Options/Sounds/GameMusic"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_font_sizes/font_size = 25
+text = "Game music
+"
+
+[node name="HSlider" type="HSlider" parent="OptionsPanel/Margin/Options/Sounds/GameMusic"]
+custom_minimum_size = Vector2(225, 0)
+layout_mode = 2
+size_flags_horizontal = 10
+
+[node name="UISounds" type="HBoxContainer" parent="OptionsPanel/Margin/Options/Sounds"]
+layout_direction = 1
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="Label" type="Label" parent="OptionsPanel/Margin/Options/Sounds/UISounds"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_font_sizes/font_size = 25
+text = "Interface sounds"
+
+[node name="HSlider" type="HSlider" parent="OptionsPanel/Margin/Options/Sounds/UISounds"]
+custom_minimum_size = Vector2(225, 0)
+layout_mode = 2
+size_flags_horizontal = 10
+
+[node name="SFX Effects" type="HBoxContainer" parent="OptionsPanel/Margin/Options/Sounds"]
+layout_direction = 1
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="Label" type="Label" parent="OptionsPanel/Margin/Options/Sounds/SFX Effects"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_font_sizes/font_size = 25
+text = "SFX Effects volume"
+
+[node name="HSlider" type="HSlider" parent="OptionsPanel/Margin/Options/Sounds/SFX Effects"]
+custom_minimum_size = Vector2(225, 0)
+layout_mode = 2
+size_flags_horizontal = 10
+
+[node name="KeyBinding" type="VBoxContainer" parent="OptionsPanel/Margin/Options" node_paths=PackedStringArray("key_bind_panel")]
+visible = false
+layout_mode = 2
+theme_override_constants/separation = 15
+script = ExtResource("3_nc7t1")
+key_bind_panel = NodePath("../../KeyBindPanel")
+
+[node name="Back" type="Button" parent="OptionsPanel/Margin/Options/KeyBinding"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_font_sizes/font_size = 25
+text = "Back"
+alignment = 0
+
+[node name="move_left" type="HBoxContainer" parent="OptionsPanel/Margin/Options/KeyBinding"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="OptionsPanel/Margin/Options/KeyBinding/move_left"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_font_sizes/font_size = 25
+text = "Move left"
+
+[node name="Button" type="Button" parent="OptionsPanel/Margin/Options/KeyBinding/move_left"]
+custom_minimum_size = Vector2(225, 0)
+layout_mode = 2
+focus_mode = 0
+theme_override_font_sizes/font_size = 20
+text = "None"
+
+[node name="move_right" type="HBoxContainer" parent="OptionsPanel/Margin/Options/KeyBinding"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="OptionsPanel/Margin/Options/KeyBinding/move_right"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_font_sizes/font_size = 25
+text = "Move right"
+
+[node name="Button" type="Button" parent="OptionsPanel/Margin/Options/KeyBinding/move_right"]
+custom_minimum_size = Vector2(225, 0)
+layout_mode = 2
+focus_mode = 0
+theme_override_font_sizes/font_size = 20
+text = "None"
+
+[node name="jump" type="HBoxContainer" parent="OptionsPanel/Margin/Options/KeyBinding"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="OptionsPanel/Margin/Options/KeyBinding/jump"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_font_sizes/font_size = 25
+text = "Jump"
+
+[node name="Button" type="Button" parent="OptionsPanel/Margin/Options/KeyBinding/jump"]
+custom_minimum_size = Vector2(225, 0)
+layout_mode = 2
+focus_mode = 0
+theme_override_font_sizes/font_size = 20
+text = "None"
+
+[node name="ability_1" type="HBoxContainer" parent="OptionsPanel/Margin/Options/KeyBinding"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="OptionsPanel/Margin/Options/KeyBinding/ability_1"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_font_sizes/font_size = 25
+text = "Primary attack"
+
+[node name="Button" type="Button" parent="OptionsPanel/Margin/Options/KeyBinding/ability_1"]
+custom_minimum_size = Vector2(225, 0)
+layout_mode = 2
+focus_mode = 0
+theme_override_font_sizes/font_size = 20
+text = "None"
+
+[node name="ability_2" type="HBoxContainer" parent="OptionsPanel/Margin/Options/KeyBinding"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="OptionsPanel/Margin/Options/KeyBinding/ability_2"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_font_sizes/font_size = 25
+text = "Secondary Attack"
+
+[node name="Button" type="Button" parent="OptionsPanel/Margin/Options/KeyBinding/ability_2"]
+custom_minimum_size = Vector2(225, 0)
+layout_mode = 2
+focus_mode = 0
+theme_override_font_sizes/font_size = 20
+text = "None"
+
+[node name="ability_3" type="HBoxContainer" parent="OptionsPanel/Margin/Options/KeyBinding"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="OptionsPanel/Margin/Options/KeyBinding/ability_3"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_font_sizes/font_size = 25
+text = "Tertiary attack"
+
+[node name="Button" type="Button" parent="OptionsPanel/Margin/Options/KeyBinding/ability_3"]
+custom_minimum_size = Vector2(225, 0)
+layout_mode = 2
+focus_mode = 0
+theme_override_font_sizes/font_size = 20
+text = "None"
+
+[node name="KeyBindPanel" type="Panel" parent="OptionsPanel/Margin"]
+visible = false
+custom_minimum_size = Vector2(0, 850)
+layout_mode = 2
+size_flags_vertical = 4
+
+[node name="Label" type="Label" parent="OptionsPanel/Margin/KeyBindPanel"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -20.0
+offset_top = -11.5
+offset_right = 20.0
+offset_bottom = 11.5
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_font_sizes/font_size = 25
+text = "Pres any key to bind it to action..."
+
+[connection signal="button_up" from="MainControls/VBoxContainer/Button1" to="." method="_on_button_1_button_up"]
+[connection signal="button_up" from="MainControls/VBoxContainer/Button2" to="." method="_on_button_2_button_up"]
+[connection signal="button_up" from="MainControls/VBoxContainer/Button3" to="." method="_on_button_3_button_up"]
+[connection signal="button_up" from="MainControls/VBoxContainer/Button4" to="." method="_on_quit_up"]
+[connection signal="button_up" from="OptionsPanel/Margin/Options/Controls/KeyBinding" to="." method="set_tab" binds= [3]]
+[connection signal="button_up" from="OptionsPanel/Margin/Options/KeyBinding/Back" to="." method="set_tab" binds= [1]]
