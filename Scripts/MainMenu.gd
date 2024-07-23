@@ -1,10 +1,12 @@
 extends Control
 
 
+@export var applying_panel: Panel
+
 @export var main_controls: VBoxContainer
+@export var options_nav: HBoxContainer
 
 @export var options_vbox: VBoxContainer
-@export var options_nav: HBoxContainer
 
 var main_panels = []
 var options_tab = []
@@ -17,7 +19,7 @@ enum CurrentPanel {
 }
 
 enum CurrentTab {
-	GRAPHICS,
+	DISPLAY,
 	CONTROLS,
 	SOUNDS,
 	KEY_BINDING,
@@ -25,13 +27,13 @@ enum CurrentTab {
 
 
 func _ready() -> void:
-	for tab in CurrentTab.size():
-		var vbox = options_vbox.get_child(tab + 2)
-		options_tab.append(vbox)
-	
 	for panel in get_tree().root.get_child(0).get_children():
 		if panel is PanelContainer:
 			main_panels.append(panel)
+	
+	for tab in CurrentTab.size():
+		var vbox = options_vbox.get_child(tab + 2)
+		options_tab.append(vbox)
 	
 	
 	for btn in main_controls.get_children():
@@ -40,14 +42,10 @@ func _ready() -> void:
 	for btn in options_nav.get_children():
 		btn.button_up.connect(set_tab.bind(btn.get_index()))
 	
-	
-	print(main_panels, options_tab)
-	
-	
 	set_default()
 
 func _input(event: InputEvent) -> void:
-	if event.is_action_released("back") && options_tab[CurrentTab.KEY_BINDING].listen_for_input == false:
+	if event.is_action_pressed("back") && !options_tab[CurrentTab.KEY_BINDING].listen_for_input:
 		set_default()
 
 func _on_quit_up() -> void:
@@ -66,4 +64,4 @@ func set_tab(current_tab: CurrentTab):
 
 func set_default():
 	set_panel(CurrentPanel.NONE)
-	set_tab(CurrentTab.GRAPHICS)
+	set_tab(CurrentTab.DISPLAY)

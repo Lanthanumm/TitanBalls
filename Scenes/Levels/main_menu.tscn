@@ -1,10 +1,11 @@
-[gd_scene load_steps=4 format=3 uid="uid://h613cy4huyew"]
+[gd_scene load_steps=5 format=3 uid="uid://h613cy4huyew"]
 
 [ext_resource type="Script" path="res://Scripts/MainMenu.gd" id="1_hcn4l"]
 [ext_resource type="Texture2D" uid="uid://dq8bwmv4mp121" path="res://Textures/icon.svg" id="2_6v4gj"]
 [ext_resource type="Script" path="res://Scripts/KeyBinding.gd" id="3_nc7t1"]
+[ext_resource type="Script" path="res://Scripts/SaveSystem.gd" id="4_804sp"]
 
-[node name="MainMenu" type="Control" node_paths=PackedStringArray("main_controls", "options_vbox", "options_nav")]
+[node name="MainMenu" type="Control" node_paths=PackedStringArray("main_controls", "options_nav", "options_vbox")]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -13,8 +14,8 @@ grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_hcn4l")
 main_controls = NodePath("MainControls/VBoxContainer")
+options_nav = NodePath("OptionsPanel/Margin/Options/MarginContainer/Tabs")
 options_vbox = NodePath("OptionsPanel/Margin/Options")
-options_nav = NodePath("OptionsPanel/Margin/Options/OptionsTabs")
 
 [node name="MainControls" type="MarginContainer" parent="."]
 layout_mode = 1
@@ -162,117 +163,164 @@ grow_vertical = 2
 
 [node name="Margin" type="MarginContainer" parent="OptionsPanel"]
 layout_mode = 2
-theme_override_constants/margin_left = 420
-theme_override_constants/margin_top = 40
-theme_override_constants/margin_right = 420
-theme_override_constants/margin_bottom = 40
+theme_override_constants/margin_left = 40
+theme_override_constants/margin_top = 25
+theme_override_constants/margin_right = 40
+theme_override_constants/margin_bottom = 25
 
 [node name="Options" type="VBoxContainer" parent="OptionsPanel/Margin"]
+custom_minimum_size = Vector2(800, 0)
 layout_mode = 2
+size_flags_horizontal = 4
 theme_override_constants/separation = 25
 
-[node name="OptionsTabs" type="HBoxContainer" parent="OptionsPanel/Margin/Options"]
+[node name="MarginContainer" type="MarginContainer" parent="OptionsPanel/Margin/Options"]
 layout_mode = 2
+
+[node name="Tabs" type="HBoxContainer" parent="OptionsPanel/Margin/Options/MarginContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
 theme_override_constants/separation = 60
 alignment = 1
 
-[node name="Graphics" type="Button" parent="OptionsPanel/Margin/Options/OptionsTabs"]
+[node name="Graphics" type="Button" parent="OptionsPanel/Margin/Options/MarginContainer/Tabs"]
 custom_minimum_size = Vector2(100, 0)
 layout_mode = 2
 focus_mode = 0
-text = "Graphics"
+text = "Display"
 
-[node name="Controls" type="Button" parent="OptionsPanel/Margin/Options/OptionsTabs"]
+[node name="Controls" type="Button" parent="OptionsPanel/Margin/Options/MarginContainer/Tabs"]
 custom_minimum_size = Vector2(100, 0)
 layout_mode = 2
 focus_mode = 0
 text = "Controls"
 
-[node name="Sounds" type="Button" parent="OptionsPanel/Margin/Options/OptionsTabs"]
+[node name="Sounds" type="Button" parent="OptionsPanel/Margin/Options/MarginContainer/Tabs"]
 custom_minimum_size = Vector2(100, 0)
 layout_mode = 2
 focus_mode = 0
 text = "Sounds
 "
 
+[node name="Button" type="Button" parent="OptionsPanel/Margin/Options/MarginContainer"]
+layout_mode = 2
+size_flags_horizontal = 8
+focus_mode = 0
+text = "Close"
+
 [node name="Line1" type="ColorRect" parent="OptionsPanel/Margin/Options"]
 custom_minimum_size = Vector2(0, 1)
 layout_mode = 2
 
-[node name="Graphics" type="VBoxContainer" parent="OptionsPanel/Margin/Options"]
-visible = false
+[node name="Display" type="ScrollContainer" parent="OptionsPanel/Margin/Options"]
 layout_mode = 2
+size_flags_vertical = 3
+horizontal_scroll_mode = 0
+
+[node name="Display" type="VBoxContainer" parent="OptionsPanel/Margin/Options/Display"]
+layout_mode = 2
+size_flags_horizontal = 3
 theme_override_constants/separation = 15
 alignment = 1
 
-[node name="Particles" type="HBoxContainer" parent="OptionsPanel/Margin/Options/Graphics"]
+[node name="UIScale" type="HBoxContainer" parent="OptionsPanel/Margin/Options/Display/Display"]
 layout_direction = 1
 layout_mode = 2
 size_flags_vertical = 3
 
-[node name="Label" type="Label" parent="OptionsPanel/Margin/Options/Graphics/Particles"]
+[node name="Label" type="Label" parent="OptionsPanel/Margin/Options/Display/Display/UIScale"]
 layout_mode = 2
 size_flags_horizontal = 3
 theme_override_font_sizes/font_size = 25
-text = "Particles"
+text = "UI Scale"
 
-[node name="CheckButton" type="CheckButton" parent="OptionsPanel/Margin/Options/Graphics/Particles"]
+[node name="HSlider" type="HSlider" parent="OptionsPanel/Margin/Options/Display/Display/UIScale"]
+custom_minimum_size = Vector2(225, 35)
 layout_mode = 2
+size_flags_horizontal = 10
 focus_mode = 0
+min_value = 0.5
+max_value = 3.0
+step = 0.5
+value = 1.0
 
-[node name="Effetcts" type="HBoxContainer" parent="OptionsPanel/Margin/Options/Graphics"]
+[node name="Brightness" type="HBoxContainer" parent="OptionsPanel/Margin/Options/Display/Display"]
 layout_direction = 1
 layout_mode = 2
 size_flags_vertical = 3
 
-[node name="Label" type="Label" parent="OptionsPanel/Margin/Options/Graphics/Effetcts"]
-layout_mode = 2
-size_flags_horizontal = 3
-theme_override_font_sizes/font_size = 25
-text = "Effects"
-
-[node name="CheckButton" type="CheckButton" parent="OptionsPanel/Margin/Options/Graphics/Effetcts"]
-layout_mode = 2
-focus_mode = 0
-
-[node name="Splashes" type="HBoxContainer" parent="OptionsPanel/Margin/Options/Graphics"]
-layout_direction = 1
-layout_mode = 2
-size_flags_vertical = 3
-
-[node name="Label" type="Label" parent="OptionsPanel/Margin/Options/Graphics/Splashes"]
-layout_mode = 2
-size_flags_horizontal = 3
-theme_override_font_sizes/font_size = 25
-text = "Splashes"
-
-[node name="CheckButton" type="CheckButton" parent="OptionsPanel/Margin/Options/Graphics/Splashes"]
-layout_mode = 2
-focus_mode = 0
-
-[node name="Brightness" type="HBoxContainer" parent="OptionsPanel/Margin/Options/Graphics"]
-layout_direction = 1
-layout_mode = 2
-size_flags_vertical = 3
-
-[node name="Label" type="Label" parent="OptionsPanel/Margin/Options/Graphics/Brightness"]
+[node name="Label" type="Label" parent="OptionsPanel/Margin/Options/Display/Display/Brightness"]
 layout_mode = 2
 size_flags_horizontal = 3
 theme_override_font_sizes/font_size = 25
 text = "Brightness"
 
-[node name="HSlider" type="HSlider" parent="OptionsPanel/Margin/Options/Graphics/Brightness"]
+[node name="HSlider" type="HSlider" parent="OptionsPanel/Margin/Options/Display/Display/Brightness"]
 custom_minimum_size = Vector2(225, 35)
 layout_mode = 2
 size_flags_horizontal = 10
 focus_mode = 0
+value = 50.0
 
-[node name="Controls" type="VBoxContainer" parent="OptionsPanel/Margin/Options"]
+[node name="Particles" type="HBoxContainer" parent="OptionsPanel/Margin/Options/Display/Display"]
+layout_direction = 1
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="Label" type="Label" parent="OptionsPanel/Margin/Options/Display/Display/Particles"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_font_sizes/font_size = 25
+text = "Particles"
+
+[node name="CheckButton" type="CheckButton" parent="OptionsPanel/Margin/Options/Display/Display/Particles"]
+layout_mode = 2
+focus_mode = 0
+button_pressed = true
+
+[node name="Effetcts" type="HBoxContainer" parent="OptionsPanel/Margin/Options/Display/Display"]
+layout_direction = 1
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="Label" type="Label" parent="OptionsPanel/Margin/Options/Display/Display/Effetcts"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_font_sizes/font_size = 25
+text = "Camera shake"
+
+[node name="CheckButton" type="CheckButton" parent="OptionsPanel/Margin/Options/Display/Display/Effetcts"]
+layout_mode = 2
+focus_mode = 0
+button_pressed = true
+
+[node name="VSync" type="HBoxContainer" parent="OptionsPanel/Margin/Options/Display/Display"]
+layout_direction = 1
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="Label" type="Label" parent="OptionsPanel/Margin/Options/Display/Display/VSync"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_font_sizes/font_size = 25
+text = "VSync"
+
+[node name="CheckButton" type="CheckButton" parent="OptionsPanel/Margin/Options/Display/Display/VSync"]
+layout_mode = 2
+focus_mode = 0
+button_pressed = true
+
+[node name="Controls" type="ScrollContainer" parent="OptionsPanel/Margin/Options"]
 visible = false
 layout_mode = 2
+size_flags_vertical = 3
+
+[node name="Controls" type="VBoxContainer" parent="OptionsPanel/Margin/Options/Controls"]
+layout_mode = 2
+size_flags_horizontal = 3
 theme_override_constants/separation = 15
 
-[node name="KeyBinding" type="Button" parent="OptionsPanel/Margin/Options/Controls"]
+[node name="KeyBinding" type="Button" parent="OptionsPanel/Margin/Options/Controls/Controls"]
 layout_mode = 2
 size_flags_horizontal = 3
 focus_mode = 0
@@ -280,259 +328,275 @@ theme_override_font_sizes/font_size = 25
 text = "Key binding"
 alignment = 0
 
-[node name="InvertMouse" type="HBoxContainer" parent="OptionsPanel/Margin/Options/Controls"]
+[node name="InvertMouse" type="HBoxContainer" parent="OptionsPanel/Margin/Options/Controls/Controls"]
 layout_mode = 2
 
-[node name="Label" type="Label" parent="OptionsPanel/Margin/Options/Controls/InvertMouse"]
-layout_mode = 2
-size_flags_horizontal = 3
-theme_override_font_sizes/font_size = 25
-text = "Invert mouse by X axis"
-
-[node name="CheckButton" type="CheckButton" parent="OptionsPanel/Margin/Options/Controls/InvertMouse"]
-layout_mode = 2
-focus_mode = 0
-
-[node name="MouseSensivity" type="HBoxContainer" parent="OptionsPanel/Margin/Options/Controls"]
-layout_direction = 1
-layout_mode = 2
-size_flags_vertical = 3
-
-[node name="Label" type="Label" parent="OptionsPanel/Margin/Options/Controls/MouseSensivity"]
+[node name="Label" type="Label" parent="OptionsPanel/Margin/Options/Controls/Controls/InvertMouse"]
 layout_mode = 2
 size_flags_horizontal = 3
 theme_override_font_sizes/font_size = 25
-text = "Mouse sensivity"
+text = "Invert mouse"
 
-[node name="HSlider" type="HSlider" parent="OptionsPanel/Margin/Options/Controls/MouseSensivity"]
-custom_minimum_size = Vector2(225, 35)
+[node name="CheckButton" type="CheckButton" parent="OptionsPanel/Margin/Options/Controls/Controls/InvertMouse"]
 layout_mode = 2
-size_flags_horizontal = 10
 focus_mode = 0
 
-[node name="Sounds" type="VBoxContainer" parent="OptionsPanel/Margin/Options"]
+[node name="Sounds" type="ScrollContainer" parent="OptionsPanel/Margin/Options"]
 visible = false
 layout_mode = 2
+size_flags_vertical = 3
+
+[node name="Sounds" type="VBoxContainer" parent="OptionsPanel/Margin/Options/Sounds"]
+layout_mode = 2
+size_flags_horizontal = 3
 theme_override_constants/separation = 15
 
-[node name="MasterVolume" type="HBoxContainer" parent="OptionsPanel/Margin/Options/Sounds"]
+[node name="MasterVolume" type="HBoxContainer" parent="OptionsPanel/Margin/Options/Sounds/Sounds"]
 layout_direction = 1
 layout_mode = 2
 size_flags_vertical = 3
 
-[node name="Label" type="Label" parent="OptionsPanel/Margin/Options/Sounds/MasterVolume"]
+[node name="Label" type="Label" parent="OptionsPanel/Margin/Options/Sounds/Sounds/MasterVolume"]
 layout_mode = 2
 size_flags_horizontal = 3
 theme_override_font_sizes/font_size = 25
 text = "Master volume"
 
-[node name="HSlider" type="HSlider" parent="OptionsPanel/Margin/Options/Sounds/MasterVolume"]
-custom_minimum_size = Vector2(225, 0)
+[node name="HSlider" type="HSlider" parent="OptionsPanel/Margin/Options/Sounds/Sounds/MasterVolume"]
+custom_minimum_size = Vector2(225, 35)
 layout_mode = 2
 size_flags_horizontal = 10
 focus_mode = 0
+value = 100.0
 
-[node name="MainMenuMusic" type="HBoxContainer" parent="OptionsPanel/Margin/Options/Sounds"]
+[node name="MainMenuMusic" type="HBoxContainer" parent="OptionsPanel/Margin/Options/Sounds/Sounds"]
 layout_direction = 1
 layout_mode = 2
 size_flags_vertical = 3
 
-[node name="Label" type="Label" parent="OptionsPanel/Margin/Options/Sounds/MainMenuMusic"]
+[node name="Label" type="Label" parent="OptionsPanel/Margin/Options/Sounds/Sounds/MainMenuMusic"]
 layout_mode = 2
 size_flags_horizontal = 3
 theme_override_font_sizes/font_size = 25
 text = "Main menu music
 "
 
-[node name="HSlider" type="HSlider" parent="OptionsPanel/Margin/Options/Sounds/MainMenuMusic"]
-custom_minimum_size = Vector2(225, 0)
+[node name="HSlider" type="HSlider" parent="OptionsPanel/Margin/Options/Sounds/Sounds/MainMenuMusic"]
+custom_minimum_size = Vector2(225, 35)
 layout_mode = 2
 size_flags_horizontal = 10
+value = 100.0
 
-[node name="GameMusic" type="HBoxContainer" parent="OptionsPanel/Margin/Options/Sounds"]
+[node name="GameMusic" type="HBoxContainer" parent="OptionsPanel/Margin/Options/Sounds/Sounds"]
 layout_direction = 1
 layout_mode = 2
 size_flags_vertical = 3
 
-[node name="Label" type="Label" parent="OptionsPanel/Margin/Options/Sounds/GameMusic"]
+[node name="Label" type="Label" parent="OptionsPanel/Margin/Options/Sounds/Sounds/GameMusic"]
 layout_mode = 2
 size_flags_horizontal = 3
 theme_override_font_sizes/font_size = 25
 text = "Game music
 "
 
-[node name="HSlider" type="HSlider" parent="OptionsPanel/Margin/Options/Sounds/GameMusic"]
-custom_minimum_size = Vector2(225, 0)
+[node name="HSlider" type="HSlider" parent="OptionsPanel/Margin/Options/Sounds/Sounds/GameMusic"]
+custom_minimum_size = Vector2(225, 35)
 layout_mode = 2
 size_flags_horizontal = 10
+value = 100.0
 
-[node name="UISounds" type="HBoxContainer" parent="OptionsPanel/Margin/Options/Sounds"]
+[node name="UISounds" type="HBoxContainer" parent="OptionsPanel/Margin/Options/Sounds/Sounds"]
 layout_direction = 1
 layout_mode = 2
 size_flags_vertical = 3
 
-[node name="Label" type="Label" parent="OptionsPanel/Margin/Options/Sounds/UISounds"]
+[node name="Label" type="Label" parent="OptionsPanel/Margin/Options/Sounds/Sounds/UISounds"]
 layout_mode = 2
 size_flags_horizontal = 3
 theme_override_font_sizes/font_size = 25
 text = "Interface sounds"
 
-[node name="HSlider" type="HSlider" parent="OptionsPanel/Margin/Options/Sounds/UISounds"]
-custom_minimum_size = Vector2(225, 0)
+[node name="HSlider" type="HSlider" parent="OptionsPanel/Margin/Options/Sounds/Sounds/UISounds"]
+custom_minimum_size = Vector2(225, 35)
 layout_mode = 2
 size_flags_horizontal = 10
+value = 100.0
 
-[node name="SFX Effects" type="HBoxContainer" parent="OptionsPanel/Margin/Options/Sounds"]
+[node name="SFX Effects" type="HBoxContainer" parent="OptionsPanel/Margin/Options/Sounds/Sounds"]
 layout_direction = 1
 layout_mode = 2
 size_flags_vertical = 3
 
-[node name="Label" type="Label" parent="OptionsPanel/Margin/Options/Sounds/SFX Effects"]
+[node name="Label" type="Label" parent="OptionsPanel/Margin/Options/Sounds/Sounds/SFX Effects"]
 layout_mode = 2
 size_flags_horizontal = 3
 theme_override_font_sizes/font_size = 25
 text = "SFX Effects volume"
 
-[node name="HSlider" type="HSlider" parent="OptionsPanel/Margin/Options/Sounds/SFX Effects"]
-custom_minimum_size = Vector2(225, 0)
+[node name="HSlider" type="HSlider" parent="OptionsPanel/Margin/Options/Sounds/Sounds/SFX Effects"]
+custom_minimum_size = Vector2(225, 35)
 layout_mode = 2
 size_flags_horizontal = 10
+value = 100.0
 
-[node name="KeyBinding" type="VBoxContainer" parent="OptionsPanel/Margin/Options" node_paths=PackedStringArray("key_bind_panel")]
+[node name="KeyBinding" type="ScrollContainer" parent="OptionsPanel/Margin/Options"]
 visible = false
 layout_mode = 2
-theme_override_constants/separation = 15
-script = ExtResource("3_nc7t1")
-key_bind_panel = NodePath("../../KeyBindPanel")
+size_flags_vertical = 3
 
-[node name="Back" type="Button" parent="OptionsPanel/Margin/Options/KeyBinding"]
+[node name="KeyBinding" type="VBoxContainer" parent="OptionsPanel/Margin/Options/KeyBinding"]
 layout_mode = 2
 size_flags_horizontal = 3
+theme_override_constants/separation = 15
+script = ExtResource("3_nc7t1")
+
+[node name="Back" type="Button" parent="OptionsPanel/Margin/Options/KeyBinding/KeyBinding"]
+layout_mode = 2
+size_flags_horizontal = 3
+focus_mode = 0
 theme_override_font_sizes/font_size = 25
 text = "Back"
 alignment = 0
 
-[node name="move_left" type="HBoxContainer" parent="OptionsPanel/Margin/Options/KeyBinding"]
+[node name="move_left" type="HBoxContainer" parent="OptionsPanel/Margin/Options/KeyBinding/KeyBinding"]
 layout_mode = 2
 
-[node name="Label" type="Label" parent="OptionsPanel/Margin/Options/KeyBinding/move_left"]
+[node name="Label" type="Label" parent="OptionsPanel/Margin/Options/KeyBinding/KeyBinding/move_left"]
 layout_mode = 2
 size_flags_horizontal = 3
 theme_override_font_sizes/font_size = 25
 text = "Move left"
 
-[node name="Button" type="Button" parent="OptionsPanel/Margin/Options/KeyBinding/move_left"]
+[node name="Button" type="Button" parent="OptionsPanel/Margin/Options/KeyBinding/KeyBinding/move_left"]
 custom_minimum_size = Vector2(225, 0)
 layout_mode = 2
 focus_mode = 0
 theme_override_font_sizes/font_size = 20
 text = "None"
 
-[node name="move_right" type="HBoxContainer" parent="OptionsPanel/Margin/Options/KeyBinding"]
+[node name="move_right" type="HBoxContainer" parent="OptionsPanel/Margin/Options/KeyBinding/KeyBinding"]
 layout_mode = 2
 
-[node name="Label" type="Label" parent="OptionsPanel/Margin/Options/KeyBinding/move_right"]
+[node name="Label" type="Label" parent="OptionsPanel/Margin/Options/KeyBinding/KeyBinding/move_right"]
 layout_mode = 2
 size_flags_horizontal = 3
 theme_override_font_sizes/font_size = 25
 text = "Move right"
 
-[node name="Button" type="Button" parent="OptionsPanel/Margin/Options/KeyBinding/move_right"]
+[node name="Button" type="Button" parent="OptionsPanel/Margin/Options/KeyBinding/KeyBinding/move_right"]
 custom_minimum_size = Vector2(225, 0)
 layout_mode = 2
 focus_mode = 0
 theme_override_font_sizes/font_size = 20
 text = "None"
 
-[node name="jump" type="HBoxContainer" parent="OptionsPanel/Margin/Options/KeyBinding"]
+[node name="jump" type="HBoxContainer" parent="OptionsPanel/Margin/Options/KeyBinding/KeyBinding"]
 layout_mode = 2
 
-[node name="Label" type="Label" parent="OptionsPanel/Margin/Options/KeyBinding/jump"]
+[node name="Label" type="Label" parent="OptionsPanel/Margin/Options/KeyBinding/KeyBinding/jump"]
 layout_mode = 2
 size_flags_horizontal = 3
 theme_override_font_sizes/font_size = 25
 text = "Jump"
 
-[node name="Button" type="Button" parent="OptionsPanel/Margin/Options/KeyBinding/jump"]
+[node name="Button" type="Button" parent="OptionsPanel/Margin/Options/KeyBinding/KeyBinding/jump"]
 custom_minimum_size = Vector2(225, 0)
 layout_mode = 2
 focus_mode = 0
 theme_override_font_sizes/font_size = 20
 text = "None"
 
-[node name="ability_1" type="HBoxContainer" parent="OptionsPanel/Margin/Options/KeyBinding"]
+[node name="ability_1" type="HBoxContainer" parent="OptionsPanel/Margin/Options/KeyBinding/KeyBinding"]
 layout_mode = 2
 
-[node name="Label" type="Label" parent="OptionsPanel/Margin/Options/KeyBinding/ability_1"]
+[node name="Label" type="Label" parent="OptionsPanel/Margin/Options/KeyBinding/KeyBinding/ability_1"]
 layout_mode = 2
 size_flags_horizontal = 3
 theme_override_font_sizes/font_size = 25
 text = "Primary attack"
 
-[node name="Button" type="Button" parent="OptionsPanel/Margin/Options/KeyBinding/ability_1"]
+[node name="Button" type="Button" parent="OptionsPanel/Margin/Options/KeyBinding/KeyBinding/ability_1"]
 custom_minimum_size = Vector2(225, 0)
 layout_mode = 2
 focus_mode = 0
 theme_override_font_sizes/font_size = 20
 text = "None"
 
-[node name="ability_2" type="HBoxContainer" parent="OptionsPanel/Margin/Options/KeyBinding"]
+[node name="ability_2" type="HBoxContainer" parent="OptionsPanel/Margin/Options/KeyBinding/KeyBinding"]
 layout_mode = 2
 
-[node name="Label" type="Label" parent="OptionsPanel/Margin/Options/KeyBinding/ability_2"]
+[node name="Label" type="Label" parent="OptionsPanel/Margin/Options/KeyBinding/KeyBinding/ability_2"]
 layout_mode = 2
 size_flags_horizontal = 3
 theme_override_font_sizes/font_size = 25
 text = "Secondary Attack"
 
-[node name="Button" type="Button" parent="OptionsPanel/Margin/Options/KeyBinding/ability_2"]
+[node name="Button" type="Button" parent="OptionsPanel/Margin/Options/KeyBinding/KeyBinding/ability_2"]
 custom_minimum_size = Vector2(225, 0)
 layout_mode = 2
 focus_mode = 0
 theme_override_font_sizes/font_size = 20
 text = "None"
 
-[node name="ability_3" type="HBoxContainer" parent="OptionsPanel/Margin/Options/KeyBinding"]
+[node name="ability_3" type="HBoxContainer" parent="OptionsPanel/Margin/Options/KeyBinding/KeyBinding"]
 layout_mode = 2
 
-[node name="Label" type="Label" parent="OptionsPanel/Margin/Options/KeyBinding/ability_3"]
+[node name="Label" type="Label" parent="OptionsPanel/Margin/Options/KeyBinding/KeyBinding/ability_3"]
 layout_mode = 2
 size_flags_horizontal = 3
 theme_override_font_sizes/font_size = 25
 text = "Tertiary attack"
 
-[node name="Button" type="Button" parent="OptionsPanel/Margin/Options/KeyBinding/ability_3"]
+[node name="Button" type="Button" parent="OptionsPanel/Margin/Options/KeyBinding/KeyBinding/ability_3"]
 custom_minimum_size = Vector2(225, 0)
 layout_mode = 2
 focus_mode = 0
 theme_override_font_sizes/font_size = 20
 text = "None"
 
-[node name="KeyBindPanel" type="Panel" parent="OptionsPanel/Margin"]
+[node name="ApplyingPanel" type="PanelContainer" parent="OptionsPanel"]
 visible = false
-custom_minimum_size = Vector2(0, 850)
 layout_mode = 2
+
+[node name="MarginContainer" type="MarginContainer" parent="OptionsPanel/ApplyingPanel"]
+layout_mode = 2
+theme_override_constants/margin_left = 100
+theme_override_constants/margin_top = 100
+theme_override_constants/margin_right = 100
+theme_override_constants/margin_bottom = 100
+
+[node name="Label" type="Label" parent="OptionsPanel/ApplyingPanel/MarginContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 0
+theme_override_font_sizes/font_size = 45
+text = "Apply changes"
+
+[node name="HBoxContainer" type="HBoxContainer" parent="OptionsPanel/ApplyingPanel/MarginContainer"]
+custom_minimum_size = Vector2(500, 0)
+layout_mode = 2
+size_flags_horizontal = 4
 size_flags_vertical = 4
+theme_override_constants/separation = 10
 
-[node name="Label" type="Label" parent="OptionsPanel/Margin/KeyBindPanel"]
-layout_mode = 1
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = -20.0
-offset_top = -11.5
-offset_right = 20.0
-offset_bottom = 11.5
-grow_horizontal = 2
-grow_vertical = 2
-theme_override_font_sizes/font_size = 25
-text = "Pres any key to bind it to action..."
+[node name="Save" type="Button" parent="OptionsPanel/ApplyingPanel/MarginContainer/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+focus_mode = 0
+theme_override_font_sizes/font_size = 35
+text = "Save"
 
-[connection signal="button_up" from="MainControls/VBoxContainer/Button1" to="." method="_on_button_1_button_up"]
-[connection signal="button_up" from="MainControls/VBoxContainer/Button2" to="." method="_on_button_2_button_up"]
-[connection signal="button_up" from="MainControls/VBoxContainer/Button3" to="." method="_on_button_3_button_up"]
+[node name="Cancel" type="Button" parent="OptionsPanel/ApplyingPanel/MarginContainer/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+focus_mode = 0
+theme_override_font_sizes/font_size = 35
+text = "Cancel"
+
+[node name="SaveSystem" type="Node" parent="."]
+script = ExtResource("4_804sp")
+
 [connection signal="button_up" from="MainControls/VBoxContainer/Button4" to="." method="_on_quit_up"]
-[connection signal="button_up" from="OptionsPanel/Margin/Options/Controls/KeyBinding" to="." method="set_tab" binds= [3]]
-[connection signal="button_up" from="OptionsPanel/Margin/Options/KeyBinding/Back" to="." method="set_tab" binds= [1]]
+[connection signal="button_up" from="OptionsPanel/Margin/Options/MarginContainer/Button" to="." method="set_default"]
+[connection signal="button_up" from="OptionsPanel/Margin/Options/Controls/Controls/KeyBinding" to="." method="set_tab" binds= [3]]
+[connection signal="button_up" from="OptionsPanel/Margin/Options/KeyBinding/KeyBinding/Back" to="." method="set_tab" binds= [1]]

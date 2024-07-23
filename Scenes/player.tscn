@@ -1,137 +1,32 @@
-[gd_scene load_steps=12 format=3 uid="uid://x0vlml2h23s6"]
+[gd_scene load_steps=8 format=3 uid="uid://x0vlml2h23s6"]
 
-[ext_resource type="Script" path="res://Scripts/player.gd" id="1_rjuu7"]
-[ext_resource type="Texture2D" uid="uid://bx1xbj2ip8fe8" path="res://Textures/hunter_spritesheet.png" id="2_n400k"]
+[ext_resource type="Script" path="res://Scripts/Player.gd" id="1_rjuu7"]
+[ext_resource type="Shader" path="res://fgdgf.gdshader" id="2_dik8w"]
+[ext_resource type="Texture2D" uid="uid://l6xmhiaxx4s5" path="res://Textures/hunter.png" id="3_rijnh"]
 [ext_resource type="Script" path="res://Scripts/Abilities.gd" id="3_uje85"]
+[ext_resource type="Script" path="res://Scripts/HunterAnimation.gd" id="4_367gp"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_5i0sn"]
 size = Vector2(40.7432, 40.7432)
 
-[sub_resource type="Animation" id="Animation_tudlk"]
-length = 0.001
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("Sprite:frame")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [26]
-}
-
-[sub_resource type="Animation" id="Animation_7h2gn"]
-resource_name = "dash"
-length = 0.5
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("Sprite:frame")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.1, 0.2, 0.3, 0.4, 0.5),
-"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1),
-"update": 1,
-"values": [78, 79, 80, 81, 82, 0]
-}
-
-[sub_resource type="Animation" id="Animation_2vod6"]
-resource_name = "fall"
-length = 0.2
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("Sprite:frame")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.1),
-"transitions": PackedFloat32Array(1, 1),
-"update": 1,
-"values": [42, 43]
-}
-
-[sub_resource type="Animation" id="Animation_kuvla"]
-resource_name = "idle"
-length = 0.8
-loop_mode = 1
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("Sprite:frame")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [0]
-}
-
-[sub_resource type="Animation" id="Animation_4c2kj"]
-resource_name = "jump"
-length = 0.3
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("Sprite:frame")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.1, 0.2, 0.3),
-"transitions": PackedFloat32Array(1, 1, 1, 1),
-"update": 1,
-"values": [39, 40, 41, 42]
-}
-
-[sub_resource type="Animation" id="Animation_3or55"]
-resource_name = "walk"
-length = 0.4
-loop_mode = 1
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("Sprite:frame")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.1, 0.2, 0.3),
-"transitions": PackedFloat32Array(1, 1, 1, 1),
-"update": 1,
-"values": [65, 66, 67, 66]
-}
-
-[sub_resource type="AnimationLibrary" id="AnimationLibrary_l56nc"]
-_data = {
-"RESET": SubResource("Animation_tudlk"),
-"dash": SubResource("Animation_7h2gn"),
-"fall": SubResource("Animation_2vod6"),
-"idle": SubResource("Animation_kuvla"),
-"jump": SubResource("Animation_4c2kj"),
-"walk": SubResource("Animation_3or55")
-}
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_hv880"]
+shader = ExtResource("2_dik8w")
+shader_parameter/deformation = Vector2(0.07, 0.07)
+shader_parameter/sideWaysDeformationFactor = 5.0
+shader_parameter/knockbackFactor = 0.0
 
 [node name="Player" type="CharacterBody2D"]
 script = ExtResource("1_rjuu7")
-
-[node name="Sprite" type="Sprite2D" parent="."]
-scale = Vector2(0.1, 0.1)
-texture = ExtResource("2_n400k")
-hframes = 13
-vframes = 7
-frame = 26
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 visible = false
 shape = SubResource("RectangleShape2D_5i0sn")
 
-[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
-libraries = {
-"": SubResource("AnimationLibrary_l56nc")
-}
+[node name="Sprite" type="Sprite2D" parent="."]
+material = SubResource("ShaderMaterial_hv880")
+scale = Vector2(0.1, 0.1)
+texture = ExtResource("3_rijnh")
+script = ExtResource("4_367gp")
 
-[node name="Abilities" type="Node2D" parent="."]
+[node name="Abilities" type="Node" parent="."]
 script = ExtResource("3_uje85")
